@@ -1,6 +1,5 @@
 package com.project.zulexbackend.controller;
 
-import com.project.zulexbackend.http.request.LoginRequest;
 import com.project.zulexbackend.http.request.RegistrationRequest;
 import com.project.zulexbackend.service.UserService;
 import lombok.AllArgsConstructor;
