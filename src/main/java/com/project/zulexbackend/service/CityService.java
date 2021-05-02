@@ -21,4 +21,12 @@ public class CityService {
     public List<City> getCitiesForCanton(Integer cantonId) {
         return cityRepository.getCitiesForCanton(cantonId);
     }
+
+    public int deleteCity(Integer cityId) {
+        return cityRepository.deleteCity(cityId);
+    }
+
+    public City updateCity(Integer cityId, CityRequest cityRequest) {
+        return cityRepository.updateCity(cityId, cityRequest);
+    }
 }

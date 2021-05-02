@@ -3,17 +3,13 @@ package com.project.zulexbackend.repository;
 import com.project.zulexbackend.http.request.CityRequest;
 import com.project.zulexbackend.model.Canton;
 import com.project.zulexbackend.model.City;
-import com.project.zulexbackend.model.Company;
 import lombok.AllArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,5 +42,14 @@ public class CityRepository {
 
     public List<City> getCitiesForCanton(Integer cantonId) {
         return jdbcTemplate.query(String.format("SELECT id, name FROM City WHERE cantonId = %d", cantonId), new BeanPropertyRowMapper(City.class));
+    }
+
+    public int deleteCity(Integer cityId) {
+        return jdbcTemplate.update(String.format("DELETE FROM City WHERE id=%d", cityId));
+    }
+
+    public City updateCity(Integer cityId, CityRequest cityRequest) {
+        deleteCity(cityId);
+        return createCity(cityRequest);
     }
 }
