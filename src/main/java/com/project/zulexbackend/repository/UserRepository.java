@@ -17,8 +17,6 @@ public class UserRepository {
     public void register(User user) {
         SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate).withTableName("User").usingGeneratedKeyColumns("id");
 
-        System.out.println(user);
-
         Map<String, Object> parameters = new java.util.HashMap<>(Map.of(
                 "name", user.getName(),
                 "lastName", user.getLastName(),

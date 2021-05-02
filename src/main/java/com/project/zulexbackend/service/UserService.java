@@ -5,7 +5,6 @@ import com.project.zulexbackend.model.User;
 import com.project.zulexbackend.model.enums.UserRole;
 import com.project.zulexbackend.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
