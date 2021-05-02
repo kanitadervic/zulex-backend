@@ -1,10 +1,15 @@
 package com.project.zulexbackend.repository;
 
 import com.project.zulexbackend.model.User;
+import com.project.zulexbackend.service.UserDetailsImpl;
 import lombok.AllArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 
@@ -29,4 +34,18 @@ public class UserRepository {
         jdbcInsert.execute(parameters);
 
     }
+
+    @Transactional
+    public UserDetails findByUsername(String username) throws UsernameNotFoundException {
+        try {
+            User user = jdbcTemplate.queryForObject(String.format("SELECT * FROM User WHERE username='%s'", username), new BeanPropertyRowMapper<>(User.class));
+
+            System.out.println(user);
+            return UserDetailsImpl.build(user);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

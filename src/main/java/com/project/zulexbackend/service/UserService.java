@@ -23,7 +23,7 @@ public class UserService {
         user.setPhone(registrationRequest.getPhone());
         user.setUsername(registrationRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
-        user.setRole(UserRole.ROLE_SELLER);
+        user.setRole(UserRole.ROLE_EMPLOYEE);
 
         userRepository.register(user);
     }

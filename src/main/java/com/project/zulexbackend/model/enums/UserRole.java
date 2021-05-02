@@ -1,6 +1,6 @@
 package com.project.zulexbackend.model.enums;
 
 public enum UserRole {
-    ROLE_SELLER,
+    ROLE_EMPLOYEE,
     ROLE_ADMIN
 }
