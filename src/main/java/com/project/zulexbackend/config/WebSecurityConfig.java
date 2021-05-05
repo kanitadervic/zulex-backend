@@ -1,5 +1,6 @@
 package com.project.zulexbackend.config;
 
+import com.project.zulexbackend.service.UserDetailsServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
         prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private UserDetailsServiceImpl userDetailsService;
 
     @Override
     public void configure(HttpSecurity httpSecurity) {
@@ -26,9 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             httpSecurity.csrf().disable();
             httpSecurity
                     .authorizeRequests()
-//                    .antMatchers("/register", "/city", "/cities", "/entity/**")
-//                    .permitAll()
                     .antMatchers("/register").hasRole("ADMIN")
+//                    .anyRequest().hasAnyRole("ADMIN", "EMPLOYEE")
                     .anyRequest()
                     .fullyAuthenticated()
                     .and()
@@ -45,14 +46,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    private CsrfTokenRepository getCsrfTokenRepository() {
-        CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
-        tokenRepository.setCookiePath("/");
-        return tokenRepository;
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
 }

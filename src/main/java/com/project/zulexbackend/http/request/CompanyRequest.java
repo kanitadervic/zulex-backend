@@ -21,4 +21,5 @@ public class CompanyRequest {
     private String contactPerson;
     private String contactPhone;
     private Integer employeeId;
+    private String responsiblePerson;
 }
