@@ -38,7 +38,8 @@ public class UserRepository {
     @Transactional
     public UserDetails findByUsername(String username) throws UsernameNotFoundException {
         try {
-            User user = jdbcTemplate.queryForObject(String.format("SELECT * FROM User WHERE username='%s'", username), new BeanPropertyRowMapper<>(User.class));
+            User user = jdbcTemplate.queryForObject(String.format("SELECT * FROM User WHERE username='%s'", username),
+                    new BeanPropertyRowMapper<>(User.class));
 
             System.out.println(user);
             return UserDetailsImpl.build(user);

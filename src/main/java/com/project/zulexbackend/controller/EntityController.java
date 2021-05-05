@@ -5,6 +5,7 @@ import com.project.zulexbackend.model.Entity;
 import com.project.zulexbackend.service.EntityService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/entity")
 @AllArgsConstructor
+@PreAuthorize("hasAnyRole('ADMIN', 'EMPLOYEE')")
 public class EntityController {
 
     private EntityService entityService;

@@ -26,8 +26,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             httpSecurity.csrf().disable();
             httpSecurity
                     .authorizeRequests()
-                    .antMatchers("/register", "/city", "/cities", "/entity/**")
-                    .permitAll()
+//                    .antMatchers("/register", "/city", "/cities", "/entity/**")
+//                    .permitAll()
+                    .antMatchers("/register").hasRole("ADMIN")
                     .anyRequest()
                     .fullyAuthenticated()
                     .and()
@@ -44,11 +45,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    private CsrfTokenRepository getCsrfTokenRepository() {
-//        CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
-//        tokenRepository.setCookiePath("/");
-//        return tokenRepository;
-//    }
+    private CsrfTokenRepository getCsrfTokenRepository() {
+        CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        tokenRepository.setCookiePath("/");
+        return tokenRepository;
+    }
 
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
