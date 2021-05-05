@@ -15,6 +15,7 @@ create table Company
     vatNumber varchar(128) not null,
     predominantActivity varchar(256) not null,
     contactPerson varchar(128) not null,
+    contactPhone varchar(128) not null,
     employeeId int not null,
     editedBy int
 );

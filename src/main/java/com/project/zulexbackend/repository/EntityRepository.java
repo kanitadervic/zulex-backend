@@ -27,11 +27,11 @@ public class EntityRepository {
                 c -> c.setCities(setCitiesForCanton(c))
         ));
 
-//        entities.forEach(e -> e.getCantons().forEach(
-//                c -> c.getCities().forEach(
-//                        city -> city.setCompanies(setCompaniesForCity(city))
-//                )
-//        ));
+        entities.forEach(e -> e.getCantons().forEach(
+                c -> c.getCities().forEach(
+                        city -> city.setCompanies(setCompaniesForCity(city))
+                )
+        ));
 
         return entities;
     }
